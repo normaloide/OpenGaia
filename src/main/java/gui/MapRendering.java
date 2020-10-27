@@ -52,6 +52,7 @@ public class MapRendering extends JPanel implements DataTags {
 
         collector.landuseCollector();
         collector.leisureCollector();
+        collector.naturalCollector();
         collector.buildingCollector();
         collector.wayCollector();
     }
@@ -73,8 +74,10 @@ public class MapRendering extends JPanel implements DataTags {
         painter.paintBackground();
         painter.paintLanduse();
         painter.paintLeisure();
-        painter.paintBuilding();
+        painter.paintGroundNatural();
         painter.paintWaterway();
+        painter.paintWaterNatural();
+        painter.paintBuilding();
         painter.paintHighway();
         painter.paintWayLabel();
     }

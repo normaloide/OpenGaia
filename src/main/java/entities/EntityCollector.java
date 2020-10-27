@@ -1,5 +1,6 @@
 package entities;
 
+import com.vividsolutions.jts.geom.Geometry;
 import com.vividsolutions.jts.geom.LineString;
 import com.vividsolutions.jts.geom.MultiPolygon;
 import de.topobyte.osm4j.core.dataset.InMemoryMapDataSet;
@@ -45,22 +46,36 @@ public class EntityCollector implements DataTags {
 
     public void landuseCollector() {
         this.key = "landuse";
-        landuseRelationCollector();
-        landuseWayCollector();
+        relationCollector(landuses);
+        wayCollector(landuses, validLanduses);
     }
 
-    private void landuseRelationCollector() {
+    public void leisureCollector() {
+        this.key = "leisure";
+        relationCollector(leisures);
+        specialNodeCollector(specialLeisures);
+        wayCollector(leisures, validLeisures);
+    }
+
+    public void naturalCollector() {
+        this.key = "natural";
+        relationCollector(naturals);
+        specialNodeCollector(specialNaturals);
+        wayCollector(naturals, validNaturals);
+    }
+
+    private void relationCollector(Map<Geometry, String> map) {
         for (OsmRelation relation : this.relationCollection) {
             Map<String, String> tags = OsmModelUtil.getTagsAsMap(relation);
-            String landuseType = tags.get(key);
-            if (landuseType == null) {
+            String type = tags.get(key);
+            if (type == null) {
                 continue;
             }
 
             if (tags.containsKey(key)) {
                 MultiPolygon area = this.geometry.getPolygon(relation);
                 if (area != null) {
-                    landuses.put(area, landuseType);
+                    map.put(area, type);
                 }
 
                 try {
@@ -70,94 +85,41 @@ public class EntityCollector implements DataTags {
         }
     }
 
-    private void landuseWayCollector() {
+    private void specialNodeCollector(Map<double[], String> map) {
+        for (OsmNode node : heapData.getNodes().valueCollection()) {
+            Map<String, String> tags = OsmModelUtil.getTagsAsMap(node);
+            String type = tags.get(key);
+            if (type == null) {
+                continue;
+            }
+
+            if (tags.containsKey(key)) {
+                double[] place = {node.getLatitude(), node.getLongitude()};
+                map.put(place, type);
+            }
+        }
+    }
+
+    private void wayCollector(Map<Geometry, String> map, Set<String> valid) {
         for (OsmWay way : this.wayCollection) {
             if (this.relationSet.contains(way)) {
                 continue;
             }
 
             Map<String, String> tags = OsmModelUtil.getTagsAsMap(way);
-            String landuseType = tags.get(key);
-            if (landuseType == null) {
+            String type = tags.get(key);
+            if (type == null) {
                 continue;
             }
 
-            if (!validLanduses.contains(landuseType)) {
+            if (!valid.contains(type)) {
                 continue;
             }
 
             if (tags.containsKey(key)) {
                 MultiPolygon area = this.geometry.getPolygon(way);
                 if ( area != null ) {
-                    landuses.put(area, landuseType );
-                }
-            }
-        }
-    }
-
-    public void leisureCollector() {
-        this.key = "leisure";
-        leisureRelationCollector();
-        specialLeisureNodeCollector();
-        leisureWayCollector();
-    }
-
-    private void leisureRelationCollector() {
-        for (OsmRelation relation : this.relationCollection) {
-            Map<String, String> tags = OsmModelUtil.getTagsAsMap(relation);
-            String leisureType = tags.get(key);
-            if (leisureType == null) {
-                continue;
-            }
-
-            if (tags.containsKey(key)) {
-                MultiPolygon area = this.geometry.getPolygon(relation);
-                if (area != null) {
-                    leisures.put(area, leisureType);
-                }
-
-                try {
-                    this.entityFinder.findMemberWays(relation, this.relationSet);
-                } catch (EntityNotFoundException ignored) { }
-            }
-        }
-    }
-
-    private void specialLeisureNodeCollector() {
-        for (OsmNode node : heapData.getNodes().valueCollection()) {
-            Map<String, String> tags = OsmModelUtil.getTagsAsMap(node);
-            String leisureType = tags.get(key);
-            if (leisureType == null) {
-                continue;
-            }
-
-            if (tags.containsKey(key)) {
-                double[] place = {node.getLatitude(), node.getLongitude()};
-                specialLeisures.put(place, leisureType);
-            }
-        }
-    }
-
-    private void leisureWayCollector() {
-        for (OsmWay way : this.wayCollection) {
-            if (this.relationSet.contains(way)) {
-                continue;
-            }
-
-            Map<String, String> tags = OsmModelUtil.getTagsAsMap(way);
-            String leisureType = tags.get(key);
-            if (leisureType == null) {
-                continue;
-            }
-
-            if (!validLeisures.contains(leisureType)) {
-                continue;
-            }
-
-            if (tags.containsKey(key)) {
-                MultiPolygon area = this.geometry.getPolygon(way);
-                if (area != null) {
-                    leisures.put(area, leisureType);
+                    map.put(area, type );
                 }
             }
         }

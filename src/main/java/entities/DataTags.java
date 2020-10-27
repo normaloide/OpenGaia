@@ -6,7 +6,6 @@ import com.vividsolutions.jts.geom.LineString;
 import java.util.*;
 
 public interface DataTags {
-
     List<String> orderedLanduses = Arrays.asList("residential", "cemetery", "commercial",
             "construction", "industrial", "retail", "orchard", "meadow", "park", "grass",
             "farmyard", "farmland", "garages", "military", "forest", "allotments",
@@ -22,6 +21,13 @@ public interface DataTags {
     Set<String> validLeisures = new HashSet<>(orderedLeisures);
     Map<Geometry, String> leisures = new HashMap<>();
     Map<double[], String> specialLeisures = new HashMap<>();
+
+    List<String> orderedNaturals = Arrays.asList("water", "bare_rock", "grassland", "sand");
+    List<String> orderedWaterNaturals = Arrays.asList("water");
+    List<String> specialOrderedNaturals = Arrays.asList("tree");
+    Map<Geometry, String> naturals = new HashMap<>();
+    Set<String> validNaturals = new HashSet<>(orderedNaturals);
+    Map<double[], String> specialNaturals = new HashMap<>();
 
     List<Geometry> buildings = new ArrayList<>();
 

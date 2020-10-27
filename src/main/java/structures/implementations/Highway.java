@@ -30,8 +30,8 @@ public class Highway implements Way {
         highwayMap.put("secondary", new int[]{ background, 0xFBFF9D, 16, 14});
         highwayMap.put("secondary_link", new int[]{ background, 0xFBFF9D, 12, 10});
 
-        highwayMap.put("tertiary", new int[]{ background, 0xFAFAFA, 12, 10});
-        highwayMap.put("tertiary_link", new int[]{ background, 0xFAFAFA, 10, 8});
+        highwayMap.put("tertiary", new int[]{ background, 0xFAFAFA, 14, 12});
+        highwayMap.put("tertiary_link", new int[]{ background, 0xFAFAFA, 12, 10});
 
         highwayMap.put("residential", new int[]{ background, 0xFAFAFA, 10, 8});
         highwayMap.put("unclassified", new int[]{ background, 0xFAFAFA, 10, 8});
