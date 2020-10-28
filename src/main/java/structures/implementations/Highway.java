@@ -16,25 +16,25 @@ public class Highway implements Way {
     private final Map<String, int[]> highwayMap = new HashMap<>();
 
     public Highway() {
-        final int background = 0xAFAFAF;
+        final int background = 0x9D9D9D;
 
-        highwayMap.put("motorway", new int[]{ background, 0xFF9D9D, 20, 18});
-        highwayMap.put("motorway_link", new int[]{ background, 0xFF9D9D, 16, 14});
+        highwayMap.put("motorway", new int[]{ background, 0xFF9D9D, 14, 12});
+        highwayMap.put("motorway_link", new int[]{ background, 0xFF9D9D, 12, 10});
 
-        highwayMap.put("trunk", new int[]{ background, 0xFFB59D, 20, 18});
-        highwayMap.put("trunk_link", new int[]{ background, 0xFFB59D, 16, 14});
+        highwayMap.put("trunk", new int[]{ background, 0xFFB59D, 14, 12});
+        highwayMap.put("trunk_link", new int[]{ background, 0xFFB59D, 12, 10});
 
-        highwayMap.put("primary", new int[]{ background, 0xFFD59D, 20, 18});
-        highwayMap.put("primary_link", new int[]{background, 0xFFD59D, 16, 14});
+        highwayMap.put("primary", new int[]{ background, 0xFFD59D, 12, 10});
+        highwayMap.put("primary_link", new int[]{background, 0xFFD59D, 10, 8});
 
-        highwayMap.put("secondary", new int[]{ background, 0xFBFF9D, 16, 14});
-        highwayMap.put("secondary_link", new int[]{ background, 0xFBFF9D, 12, 10});
+        highwayMap.put("secondary", new int[]{ background, 0xFBFF9D, 12, 10});
+        highwayMap.put("secondary_link", new int[]{ background, 0xFBFF9D, 10, 8});
 
-        highwayMap.put("tertiary", new int[]{ background, 0xFAFAFA, 14, 12});
-        highwayMap.put("tertiary_link", new int[]{ background, 0xFAFAFA, 12, 10});
+        highwayMap.put("tertiary", new int[]{ background, 0xFAFAFA, 10, 8});
+        highwayMap.put("tertiary_link", new int[]{ background, 0xFAFAFA, 8, 6});
 
         highwayMap.put("residential", new int[]{ background, 0xFAFAFA, 10, 8});
-        highwayMap.put("unclassified", new int[]{ background, 0xFAFAFA, 10, 8});
+        highwayMap.put("unclassified", new int[]{ background, 0xFAFAFA, 8, 6});
 
         highwayMap.put("living_street", new int[]{ background, 0xDFFFFF, 4, 2});
 
