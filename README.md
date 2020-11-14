@@ -26,12 +26,8 @@ Check the to-do list down here if you want to contribute!
 
 - Create textures
 - Fix graphical inaccuracies while rendering
-- Clear the code and possibly optimize it
 - Retrieve all the entities (some are missing like areas or bus stops)
 - Set the openstreetmap logo as they say on their licence
 - Create a more efficient map parser so that huge files can be rendered
-- Search engine to look for ways or cities
 - Altitude map using geodesy
-- Climate map using an open dataset
-- Shortest path finder
 - Make a better UI
